@@ -1,0 +1,41 @@
+﻿@model Library.Models.Catalog.AssetIndexModel
+<style>
+    img {
+        height: 200px;
+        width: 200px;
+    }
+</style>
+
+<div id="assets">
+    <h3>Library Catalog</h3>
+    <div id="assetsTable">
+        <table class="table table-condensed" id="catalogIndexTable">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Author / Director</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var asset in Model.Assets)
+                {
+                    <tr class="assetRow">
+                        <td class="">
+                            <a asp-controller="Catalog" asp-action="Detail" asp-route-id="@asset.Id">
+                                <img src="@asset.ImageUrl" class="imageCell img-thumbnail img-fluid" />
+                            </a>
+                        </td>
+                        <td class="">@asset.Title </td>
+                        <td class="">@asset.AuthorOrDirector </td>
+                        <td class="">@asset.Type.Replace("Library.Models.", string.Empty) </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-lg-end mt-4">          
+            <a asp-controller="Catalog" asp-action="Create" class="btn bg-secondary text-white">Add Book</a>
+        </div>
+    </div>
+</div>
